@@ -17,7 +17,7 @@ public class Gnome {
 	public void setColour(String c) { this.favColour = c; }
 	public int getVIP() { return this.VIP; }
 	
-	public Gnome(String n, String c, int v, Village start) throws Exception{
+	public Gnome(String n, String c, int v, Village start, Census c) throws Exception{
 		this.id = IDs;
 		this.name = n;
 		this.favColour = c;
@@ -26,6 +26,7 @@ public class Gnome {
 		this.currentLocation = start;
 		start.addGnome(this);
 		visited.add(currentLocation);
+		c.population.add(this);
 	}
 	
 	public LinkedList<PublicInfrastructure> history() {
