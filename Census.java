@@ -26,6 +26,10 @@ public class Census {
 		}
 	}
 		
+	public Census() {
+		this.population = new ArrayList<Gnome>();
+	}
+	
 	ArrayList<Gnome> population;
 	
 	/** Searches through the Gnome population by ID. Implements a traditional binary search tree
@@ -53,9 +57,55 @@ public class Census {
 	public void deleteGnome(int id) {
 		if (id <= population.size()) { population.remove(id-1); }
 	}
-	
-	public Census() {
-		this.population = new ArrayList<Gnome>();
-	}
 
+	/**
+	 * Search through Gnome population by name. Returns a linked list of all gnomes with 
+	 * searched name.
+	 * @param name
+	 * @return
+	 */
+	public LinkedList<Gnome> searchByName(String name) {
+		LinkedList<Gnome> gnomes = new LinkedList<>();
+		for(Iterator<Gnome> it = population.iterator(); it.hasNext();) {
+			Gnome temp = it.next();
+			if(temp.getName().equals(name)) {
+				gnomes.add(temp);
+			}
+		}
+		return gnomes;
+	}
+	
+	/**
+	 * Search through Gnome population by color. Returns a linked list of all gnomes with
+	 * searched favorite color
+	 * @param color
+	 * @return
+	 */
+	public LinkedList<Gnome> searchByColor(String color) {
+		LinkedList<Gnome> gnomes = new LinkedList<>();
+		for(Iterator<Gnome> it = population.iterator(); it.hasNext();) {
+			Gnome temp = it.next();
+			if(temp.getColour().equals(color)) {
+				gnomes.add(temp);
+			}
+		}
+		return gnomes;
+	}
+	
+	/**
+	 * Search through Gnome population by VIP. Returns a linked list of all gnomes with
+	 * searched VIP
+	 * @param VIP
+	 * @return
+	 */
+	public LinkedList<Gnome> searchByVIP(int VIP) {
+		LinkedList<Gnome> gnomes = new LinkedList<>();
+		for(Iterator<Gnome> it = population.iterator(); it.hasNext();) {
+			Gnome temp = it.next();
+			if(temp.getVIP() == VIP) {
+				gnomes.add(temp);
+			}
+		}
+		return gnomes;
+	}
 }
