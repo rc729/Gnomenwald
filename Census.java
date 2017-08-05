@@ -1,9 +1,11 @@
 package finalProject;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Census {
+	
+	public static final Census instance = new Census();
+
 	private class BinaryTree {
 		private Gnome data;
 		private BinaryTree left;
