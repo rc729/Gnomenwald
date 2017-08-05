@@ -10,6 +10,7 @@ public class Gnome {
 	private int VIP;
 	private PublicInfrastructure currentLocation;
 	private LinkedList<PublicInfrastructure> visited = new LinkedList<>();
+	private double xpos, ypos;
 	
 	public int getID() { return this.id; }
 	public String getName() { return this.name; }
@@ -26,7 +27,9 @@ public class Gnome {
 		this.currentLocation = start;
 		start.addGnome(this);
 		visited.add(currentLocation);
-		census.population.add(this);
+		this.xpos = start.getXpos();
+		this.ypos = start.getYpos();
+		Census.instance.population.add(this);
 	}
 	
 	public LinkedList<PublicInfrastructure> history() {
