@@ -1,11 +1,10 @@
-package finalProject;
+package q;
 
 import java.util.*;
 
 public class Census {
-	
 	public static final Census instance = new Census();
-
+	
 	private class BinaryTree {
 		private Gnome data;
 		private BinaryTree left;
@@ -29,10 +28,6 @@ public class Census {
 		}
 	}
 		
-	public Census() {
-		this.population = new ArrayList<Gnome>();
-	}
-	
 	ArrayList<Gnome> population;
 	
 	/** Searches through the Gnome population by ID. Implements a traditional binary search tree
@@ -53,14 +48,6 @@ public class Census {
 		}
 		return null;
 	}
-	
-	/** Deletes a Gnome from the population list, given a valid ID
-	 * Precondition: id must be an id that belongs to a created Gnome
-	 */
-	public void deleteGnome(int id) {
-		if (id <= population.size()) { population.remove(id-1); }
-	}
-
 	/**
 	 * Search through Gnome population by name. Returns a linked list of all gnomes with 
 	 * searched name.
@@ -77,7 +64,6 @@ public class Census {
 		}
 		return gnomes;
 	}
-	
 	/**
 	 * Search through Gnome population by color. Returns a linked list of all gnomes with
 	 * searched favorite color
@@ -111,4 +97,16 @@ public class Census {
 		}
 		return gnomes;
 	}
+	
+	/** Deletes a Gnome from the population list, given a valid ID
+	 * Precondition: id must be an id that belongs to a created Gnome
+	 */
+	public void deleteGnome(int id) {
+		if (id <= population.size()) { population.remove(id-1); }
+	}
+	
+	private Census() {
+		this.population = new ArrayList<Gnome>();
+	}
+
 }

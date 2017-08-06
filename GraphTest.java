@@ -1,18 +1,26 @@
-package finalProject;
+package q;
+
+import java.util.LinkedList;
 
 public class GraphTest {
+	
+	public static void main(String[] args) throws Exception {
+		searchTest();
+		shortestTest();
+		System.out.println("-----------REMOVE VILLAGE 2 TEST---------------");
+		removeVillage2Test();
+		System.out.println("-----------GO TEST---------------");
+		goTest();
+	}
 
-		public static void main(String[] args) throws Exception {
+		public void addDeleteTest() throws Exception {
 			Graph g = new Graph();
-			Village a = new Village("A", 1000, 0);
-			Village b = new Village("B", 10, 1);
+			Village a = new Village("A", 1000, 0, 0, 0);
+			Village b = new Village("B", 10, 1, 3, 4);
 			Village c = new Village("C", 10, 1);
 			Village d = new Village("D", 10, 1);
 			Village e = new Village("E", 10, 1);
 			
-			Road ab = new Road(a,b,10, 10, 1);
-			Road ac = new Road(a,c,10, 5, 1);
-			Road db = new Road(d,b,10, 2, 0);
 
 			g.addVillage(a);
 			g.addVillage(b);
@@ -21,13 +29,15 @@ public class GraphTest {
 			g.addVillage(e);
 			
 			System.out.println(g.toString() + "\n");
+			System.out.println();
+
 			
-			g.addRoad(b,e,5,3, 1);
-			g.addRoad(c,d,5,3, 0);
-			g.addRoad(a,e,5,2, 1);
-			g.addRoad(ab);
-			g.addRoad(ac);
-			g.addRoad(db);
+			g.createRoad(b,e,3, 1);
+			g.createRoad(c,d,3, 0);
+			g.createRoad(e,c,3, 0);
+			g.createRoad(a,c,3, 0);
+			g.createRoad(a,b,3, 0);
+			
 			
 			System.out.println(g.toString() + "\n");
 			
@@ -35,11 +45,11 @@ public class GraphTest {
 			
 			System.out.println(g.toString() + "\n");
 			
-			g.deleteVillage1(a);
-			
-			System.out.println(g.getAllVillages());
-			System.out.println(g.getAllRoads() + "\n");
-			
+//			g.deleteVillage1(a);
+//			
+//			System.out.println(g.getAllVillages());
+//			System.out.println(g.getAllRoads() + "\n");
+//			
 			Gnome x = new Gnome("X", "BLUE", 1,a);
 			Gnome y = new Gnome("Y", "GREEN", 1,a);
 			Gnome z = new Gnome("Z", "BLUE", 1,a);
@@ -64,30 +74,142 @@ public class GraphTest {
 			a.addGnome(n);
 			System.out.println(a);
 			System.out.println("-------------------------------------------------");
+			
+			System.out.println(g.findAllPaths(a,d));
+		}
+		
+		private static void searchTest() {
+			Graph g = new Graph();
+			Village a = new Village("A", 1000, 0, 0, 0);
+			Village b = new Village("B", 10, 1, 3, 4);
+			Village c = new Village("C", 10, 1);
+			Village d = new Village("D", 10, 1);
+			Village e = new Village("E", 10, 1);
+
+			g.addVillage(a);
+			g.addVillage(b);
+			g.addVillage(c);
+			g.addVillage(d);
+			g.addVillage(e);
+			
+			g.createRoad(b,e,3, 1);
+			g.createRoad(c,d,3, 0);
+			g.createRoad(e,c,3, 0);
+			g.createRoad(a,c,3, 0);
+			g.createRoad(a,b,3, 0);
+			
+			
+			LinkedList<Path> paths = g.findAllPaths(a, d);
+			for (int i = 0; i < paths.size(); i++)
+				System.out.println(paths.get(i));
+		}
+		
+		private static void shortestTest() {
+			Graph g = new Graph();
+			Village a = new Village("A", 1000, 0, 0, 0);
+			Village b = new Village("B", 10, 1, 0, 5);
+			Village c = new Village("C", 10, 1,0,20);
+			Village d = new Village("D", 10, 1,0,30);
+			
+			g.addVillage(a);
+			g.addVillage(b);
+			g.addVillage(c);
+			g.addVillage(d);
+			g.createRoad(a,b,3, 1);
+			g.createRoad(b,c,3, 0);
+			g.createRoad(a,d,3, 0);
+			g.createRoad(d,c,3, 0);
+			
+			Path path = g.shortestPath(a, c);
+			System.out.println(path);
+		}
+		
+		private static void removeVillage2Test() {
+			Graph g = new Graph();
+			Village a = new Village("A", 1000, 0, 0, 0);
+			Village b = new Village("B", 10, 1, 0, 5);
+			Village c = new Village("C", 10, 1,0,20);
+			Village d = new Village("D", 10, 1,0,30);
+			Village e = new Village("E", 10, 1,0,50);
+
+			g.addVillage(a);
+			g.addVillage(b);
+			g.addVillage(c);
+			g.addVillage(d);
+			g.addVillage(e);
+			g.createRoad(a,b,3, 1);
+			g.createRoad(b,c,3, 0);
+			g.createRoad(a,d,3, 0);
+			g.createRoad(d,c,3, 0);
+			g.createRoad(c,e,3, 0);
+			g.createRoad(c,b,3, 0);
+			g.createRoad(e,c,3, 0);
+
+			dumpVillage(b);
+			System.out.println();
+
+			g.deleteVillage2(c);
+			dumpVillage(b);
+			System.out.println();
+			dumpVillage(d);
+			System.out.println();
+			dumpVillage(e);
+						
+		}
+		
+		private static void dumpVillage(Village v) {
+			System.out.println(v);
+			System.out.println("Outbound: " + v.getOutboundRoads());
+			System.out.println("Inbound : " + v.getInboundRoads());
+		}
+		
+		private static void goTest() throws Exception {
+			Graph g = new Graph();
+			Village a = new Village("A", 1000, 0, 0, 0);
+			Village b = new Village("B", 10, 1, 5, 5);
+			Village c = new Village("C", 10, 1, 5, 9);
+
+			g.addVillage(a);
+			g.addVillage(b);
+			g.addVillage(c);
+			g.createRoad(a,b,1, 1);
+			g.createRoad(b,c,3, 1);
 
 			
-			ab.addGnome(y);
-			try {
-				ab.addGnome(m);
-			}
-			catch(Exception ex){
-				ex.printStackTrace();
-			}
-			db.addGnome(x);
-			
-			System.out.println(ab);
-			System.out.println("-------------------------------------------------");
-			
-			x.go(ab);
-			x.go(b);
-			System.out.println(ab);
-			System.out.println("-------------------------------------------------");
+			Gnome x = new Gnome("X", "BLUE", 1,a);
+			Gnome y = new Gnome("Y", "BLUE", 1,a);
 
-			System.out.println(b);
-			System.out.println("-------------------------------------------------");
+			
+			new Thread( new Runnable() {
 
+				@Override
+				public void run() {
+					try {
+						x.goToVillage(c);
+					} catch (VipStatusException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}).start();
+			new Thread( new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						y.goToVillage(c);
+					} catch (VipStatusException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}					
+				}
+			}).start();
+			
+			Thread.sleep(25000);
 			System.out.println(x.history());
-			
+			System.out.println(y.history());
+
+
 			
 		}
 }

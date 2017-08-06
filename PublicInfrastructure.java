@@ -1,4 +1,4 @@
-package finalProject;
+package q;
 
 import java.util.LinkedList;
 
@@ -38,17 +38,24 @@ public class PublicInfrastructure {
 	/**
 	 * Add gnomes to the infrastructure. If the gnome vip is not high enough
 	 * or the capacity of the infrastructure has been reached, throw exception.
+	 * This method is blocked until capacity is available.
 	 * @param gnome
 	 * @throws Exception
 	 */
-	public void addGnome(Gnome gnome) throws Exception {
-		if (gnomes.size() == capacity)
-			throw new Exception("Infrastructure is full!");
-		else 
-			if (gnome.getVIP() >= VIP)
-				gnomes.add(gnome);
-			else
-				throw new Exception("VIP status not high enough!");
+	public void addGnome(Gnome gnome) throws VipStatusException {
+		if (gnome.getVIP() < VIP)
+			throw new VipStatusException();
+		
+		while(gnomes.size() >= capacity) {
+			try {
+				System.out.println("----------------------------" + gnome.getName() + " is Waiting for " + this.toString() + " -----------------------------");
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		gnomes.add(gnome);
 	}
 	
 	public void deleteGnome(Gnome gnome) {
