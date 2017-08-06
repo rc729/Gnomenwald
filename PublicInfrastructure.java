@@ -10,6 +10,8 @@ import java.util.LinkedList;
  */
 
 public class PublicInfrastructure {
+	protected static int DEFAULT_CAPACITY = 3;
+	protected static int DEFAULT_VIP = 0;
 	protected int capacity, VIP;
 	protected LinkedList<Gnome> gnomes;
 	

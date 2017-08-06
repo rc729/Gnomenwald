@@ -1,5 +1,6 @@
 package q;
 
+import java.awt.Point;
 import java.util.LinkedList;
 
 /**
@@ -10,24 +11,41 @@ import java.util.LinkedList;
 
 public class Village extends PublicInfrastructure{
 	
+	
 	private static int totalVillages = 0;
 	private int ID;
 	private String name;
-	private double xpos,ypos;
+	private int xpos,ypos;
 	private LinkedList<Road> inboundRoads = new LinkedList<>();
 	private LinkedList<Road> outboundRoads = new LinkedList<>();
 
+	public Village(int xpos, int ypos) {
+		super(DEFAULT_CAPACITY, DEFAULT_VIP);
+		totalVillages++;
+		this.ID = totalVillages;
+		this.name = "v"+ ID;
+		this.xpos= xpos;
+		this.ypos = ypos;
+	}
 	
+	public Village() {
+		super(DEFAULT_CAPACITY, DEFAULT_VIP);
+		totalVillages++;
+		this.ID = totalVillages;
+		this.name = "v"+ ID;
+		this.xpos = 0;
+		this.ypos = 0;
+	}
 	public Village(String name, int capacity, int VIP) {
 		super(capacity, VIP);
 		totalVillages++;
 		this.ID = totalVillages;
 		this.name = name;
-		this.xpos = 0.0;
-		this.ypos = 0.0;
+		this.xpos = 0;
+		this.ypos = 0;
 	}
 	
-	public Village(String name, int capacity, int VIP, double xpos, double ypos) {
+	public Village(String name, int capacity, int VIP, int xpos, int ypos) {
 		super(capacity, VIP);
 		totalVillages++;
 		this.ID = totalVillages;
@@ -73,7 +91,7 @@ public class Village extends PublicInfrastructure{
 	}
 	
 
-	public double getXpos() {
+	public int getXpos() {
 		return xpos;
 	}
 
@@ -81,12 +99,16 @@ public class Village extends PublicInfrastructure{
 		this.xpos = xpos;
 	}
 
-	public double getYpos() {
+	public int getYpos() {
 		return ypos;
 	}
 
 	public void setYpos(int ypos) {
 		this.ypos = ypos;
+	}
+	
+	public Point getPoint(){
+		return new Point(this.xpos, this.ypos);
 	}
 
 	public int getID() {

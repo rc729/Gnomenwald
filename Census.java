@@ -2,6 +2,11 @@ package q;
 
 import java.util.*;
 
+/**
+ * Census class to store the data for all gnomes in GnomenWald. Also
+ * has search methods to search for individual gnomes or groups of gnomes.
+ *
+ */
 public class Census {
 	public static final Census instance = new Census();
 	
@@ -29,6 +34,10 @@ public class Census {
 	}
 		
 	ArrayList<Gnome> population;
+	
+	public List<Gnome> getPopulation() {
+		return this.population;
+	}
 	
 	/** Searches through the Gnome population by ID. Implements a traditional binary search tree
 	 * where if a value is less than the wanted id is less than the current id it goes left, and 

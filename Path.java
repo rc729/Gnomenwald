@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class Path extends LinkedList<Village>{
 
+	private static final long serialVersionUID = 1L;
+
 	// Create a new Path same as give path
 	public Path(Path otherPath) {
 		super(otherPath);
