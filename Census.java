@@ -61,22 +61,23 @@ public class Census {
 		return out;
 	}
 	
-	public String searchVIPs(int vip) {
-		VIPBST tree = new VIPBST();
-		for (int i = 0; i < population.size(); i ++) {
-			tree.insertVIP(population.get(i));
+		/**
+	 * Search through Gnome population by VIP. Returns a linked list of all gnomes with
+	 * searched VIP
+	 * @param VIP
+	 * @return
+	 */
+	public LinkedList<Gnome> searchVIPS(int VIP) {
+		LinkedList<Gnome> gnomes = new LinkedList<>();
+		for(Iterator<Gnome> it = population.iterator(); it.hasNext();) {
+			Gnome temp = it.next();
+			if(temp.getVIP() == VIP) {
+				gnomes.add(temp);
+			}
 		}
-		List found = new ArrayList<Gnome>();
-		while (tree.searchVIP(vip) != null) {
-			found.add(tree.searchVIP(vip).getData().toString());
-			tree.deleteVIP(tree.root, vip);
-		}
-		String out = "";
-		for (int j = 0; j < found.size(); j++) {
-			out += found.get(j).toString() + "\n";
-		}
-		return out;
+		return gnomes;
 	}
+	
 	
 	public Census() {
 		this.population = new ArrayList<Gnome>();
