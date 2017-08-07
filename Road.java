@@ -7,7 +7,7 @@ package q;
  *
  */
 
-public class Road extends PublicInfrastructure{
+public class Road extends PublicInfrastructure implements Comparable<Road>{
 	
 	private Village from, to;
 	private static final int DEFAULT_CAPACITY = 5;
@@ -57,6 +57,11 @@ public class Road extends PublicInfrastructure{
 	
 	public String toString() {
 		return this.getClass().getSimpleName() + "(" + from.getName() + ", " + to.getName() + ", distance:" + getDistance() + ", gnomes:" + gnomes + ")"; 
+	}
+
+	@Override
+	public int compareTo(Road o) {
+		return (int) (this.getDistance() - o.getDistance());
 	}
 	
 }
