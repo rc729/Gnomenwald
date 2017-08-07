@@ -136,8 +136,9 @@ public class Gnome {
 	}
 	
 	public void goToVillage(Village v, int urgency) {
+		GnomenWald.Gnomenwald.start();
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
 				try {
@@ -151,6 +152,7 @@ public class Gnome {
 	}
 	
 	public void walkRandomly() {
+		GnomenWald.Gnomenwald.start();
 		if (currentLocation instanceof Road)
 			return;
 		Village location = (Village) this.currentLocation;
