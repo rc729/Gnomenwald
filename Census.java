@@ -39,55 +39,56 @@ public class Census {
 		return this.population;
 	}
 	
-	/** Searches through the Gnome population by ID. Implements a traditional binary search tree
-	 * where if a value is less than the wanted id is less than the current id it goes left, and 
-	 * vice versa
-	 * Precondition: id must be an int, and it must be less than or equal to the length of
-	 * the population list so that it is a Gnome that has been created.
-	 */
-	public Gnome searchID(int id) {
-		BinaryTree search = new BinaryTree(population.get(0));
-		for (int i = 1; i < population.size(); i++) {
-			search.addNode(population.get(i));
+	public String searchID(int id) {
+		IDBinarySearchTree tree = new IDBinarySearchTree();
+		for (int i = 0; i < population.size(); i ++) {
+			tree.insertID(population.get(i));
 		}
-		while (search != null) {
-			if (search.data.getID() == id) { return search.data; }
-			else if (search.data.getID() > id) { search = search.left; }
-			else { search = search.right; }
-		}
-		return null;
+		Gnome out = tree.searchID(id);
+		return out.toString();
 	}
-	/**
-	 * Search through Gnome population by name. Returns a linked list of all gnomes with 
-	 * searched name.
-	 * @param name
-	 * @return
-	 */
-	public LinkedList<Gnome> searchByName(String name) {
-		LinkedList<Gnome> gnomes = new LinkedList<>();
-		for(Iterator<Gnome> it = population.iterator(); it.hasNext();) {
-			Gnome temp = it.next();
-			if(temp.getName().equals(name)) {
-				gnomes.add(temp);
-			}
+	
+	public String searchID(int id) {
+		IDBinarySearchTree tree = new IDBinarySearchTree();
+		for (int i = 0; i < population.size(); i ++) {
+			tree.insertID(population.get(i));
 		}
-		return gnomes;
+		Gnome out = tree.searchID(id);
+		return out.toString();
 	}
-	/**
-	 * Search through Gnome population by color. Returns a linked list of all gnomes with
-	 * searched favorite color
-	 * @param color
-	 * @return
-	 */
-	public LinkedList<Gnome> searchByColor(String color) {
-		LinkedList<Gnome> gnomes = new LinkedList<>();
-		for(Iterator<Gnome> it = population.iterator(); it.hasNext();) {
-			Gnome temp = it.next();
-			if(temp.getColour().equals(color)) {
-				gnomes.add(temp);
-			}
+	
+	public String searchNames(String name) {
+		NameBST tree = new NameBST();
+		for (int i = 0; i < population.size(); i ++) {
+			tree.insertName(population.get(i));
 		}
-		return gnomes;
+		List found = new ArrayList<Gnome>();
+		while (tree.searchName(name) != null) {
+			found.add(tree.searchName(name).getData());
+			tree.deleteName(tree.root, name);
+		}
+		String out = "";
+		for (int j = 0; j < found.size(); j++) {
+			out += found.get(j).toString() + "\n";
+		}
+		return out;
+	}
+	
+	public String searchColours(String colour) {
+		ColourBST tree = new ColourBST();
+		for (int i = 0; i < population.size(); i ++) {
+			tree.insertColour(population.get(i));
+		}
+		List found = new ArrayList<Gnome>();
+		while (tree.searchColour(colour) != null) {
+			found.add(tree.searchColour(colour).getData());
+			tree.deleteColour(tree.root, colour);
+		}
+		String out = "";
+		for (int j = 0; j < found.size(); j++) {
+			out += found.get(j).toString() + "\n";
+		}
+		return out;
 	}
 	
 	/**
