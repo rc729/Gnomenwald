@@ -98,6 +98,10 @@ public class GuiVillage extends Village{
             n.setSelected(false);
         }
     }
+    
+    public Color getColor() {
+    	return this.color;
+    }
 
     /**
      * Select a single node; return true if not already selected.

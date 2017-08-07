@@ -15,11 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -194,36 +191,14 @@ public class GuiGnomenWald extends JComponent {
             this.add(new JButton(clearAll));
             this.add(new JButton(loadMap));
             this.add(new JButton(findGnome));
-            this.add(new JButton(new AbstractAction("Build Road"){
+            this.add(new JButton(new AbstractAction("MST Build Road"){
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-			        GuiVillage a = new GuiVillage(new Point (rnd.nextInt(getWidth()), rnd.nextInt(getHeight())), new Color(rnd.nextInt()));
-		        	GuiVillage b = new GuiVillage(new Point (rnd.nextInt(getWidth()), rnd.nextInt(getHeight())), new Color(rnd.nextInt()));
-		        	GuiVillage c = new GuiVillage(new Point (rnd.nextInt(getWidth()), rnd.nextInt(getHeight())), new Color(rnd.nextInt()));
-		        	GuiVillage d = new GuiVillage(new Point (rnd.nextInt(getWidth()), rnd.nextInt(getHeight())), new Color(rnd.nextInt()));
-		        	GuiVillage f = new GuiVillage(new Point (rnd.nextInt(getWidth()), rnd.nextInt(getHeight())), new Color(rnd.nextInt()));
-
-		        	villages.add(a);
-		            villages.add(b);
-		            villages.add(c);
-		            villages.add(d);
-		            villages.add(f);
-		        	GnomenWald.Gnomenwald.addVillage(a);
-		        	GnomenWald.Gnomenwald.addVillage(b);
-		        	GnomenWald.Gnomenwald.addVillage(c);
-		        	GnomenWald.Gnomenwald.addVillage(d);
-		        	GnomenWald.Gnomenwald.addVillage(f);
-
-		        	repaint();
-				}
-            	
-            }));
-            this.add(new JButton(new AbstractAction("MST"){
+				private static final long serialVersionUID = 1L;
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					BuildProposal.mst(GnomenWald.Gnomenwald);
+					repaint();
 				}
             	
             }));
@@ -236,7 +211,7 @@ public class GuiGnomenWald extends JComponent {
             popup.add(new AbstractAction("New Gnome") {
 
 				private static final long serialVersionUID = 1L;
-
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					GuiVillage.getSelected(villages, selected);
